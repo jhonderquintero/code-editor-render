@@ -4,7 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import css from 'rollup-plugin-import-css';
+import postcss from 'rollup-plugin-postcss';
 
 const packageJson = require('./package.json');
 
@@ -16,7 +16,6 @@ export default [
         file: packageJson.main,
         format: 'cjs',
         sourcemap: true,
-        name: 'react-ts-lib',
       },
       {
         file: packageJson.module,
@@ -30,7 +29,7 @@ export default [
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
-      css(),
+      postcss(),
     ],
     external: ['react', 'react-dom', 'styled-components'],
   },
