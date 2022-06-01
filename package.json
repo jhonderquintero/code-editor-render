@@ -1,6 +1,6 @@
 {
   "name": "code-editor-render",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Plain and simple code editor and renderer with highlighting.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
