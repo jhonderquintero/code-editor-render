@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import {
+  StyledContainer,
+  StyledPre,
+  StyledTextArea,
+} from './CodeEditor.styles';
 import './CodeEditor.styles.css';
 
 export const CodeEditor = ({ identifier }: { identifier: string }) => {
@@ -37,29 +42,28 @@ export const CodeEditor = ({ identifier }: { identifier: string }) => {
     e: React.UIEvent<HTMLTextAreaElement | HTMLPreElement>
   ) => {
     const pre = document.getElementById(uniquePreID);
-    const textAreaxd = document.getElementById(uniqueTextAreaID);
+    const textAreaElement = document.getElementById(uniqueTextAreaID);
 
     if (pre) pre.scrollTop = e.currentTarget.scrollTop;
-    if (textAreaxd) textAreaxd.scrollTop = Number(pre?.scrollTop);
+    if (textAreaElement) textAreaElement.scrollTop = Number(pre?.scrollTop);
   };
 
   useEffect(() => {
     // Same Scroll
-    const textAreaxd = document.getElementById(uniqueTextAreaID);
+    const textAreaElement = document.getElementById(uniqueTextAreaID);
     const pre = document.getElementById(uniquePreID);
-    if (pre) pre.scrollTop = Number(textAreaxd?.scrollTop);
+    if (pre) pre.scrollTop = Number(textAreaElement?.scrollTop);
 
-    // Hightlight
+    // Highlight
     const textArea = document.getElementById(uniquePreID) as HTMLPreElement;
     syntaxHighlights(textArea);
   }, [text]);
 
   return (
-    <div className="container">
-      <textarea
+    <StyledContainer>
+      <StyledTextArea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="textarea-code-editor"
         autoCapitalize="off"
         autoComplete="off"
         autoCorrect="off"
@@ -70,14 +74,13 @@ export const CodeEditor = ({ identifier }: { identifier: string }) => {
         onScroll={handleTextAreaScroll}
         ref={codeEditorRef}
       />
-      <pre
-        className="pre-code-editor"
+      <StyledPre
         aria-hidden="true"
         onScroll={handleTextAreaScroll}
         id={uniquePreID}
       >
         {text}
-      </pre>
-    </div>
+      </StyledPre>
+    </StyledContainer>
   );
 };
