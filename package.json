@@ -1,10 +1,20 @@
 {
   "name": "code-editor-render",
   "version": "0.0.7",
-  "description": "",
+  "description": "Plain and simple code editor and renderer with highlighting.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "./dist/index.d.ts",
+  "keywords": [
+    "code",
+    "editor",
+    "html",
+    "react",
+    "css",
+    "javascript",
+    "js",
+    "highlight"
+  ],
   "scripts": {
     "build": "rollup -c && cp package.json package-lock.json ./dist",
     "prettier-check": "npx prettier --check \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
@@ -17,7 +27,7 @@
     "prepare": "husky install"
   },
   "author": "Jhonder Quintero",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
@@ -71,5 +81,9 @@
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonderquintero/code-editor-render"
   }
 }
