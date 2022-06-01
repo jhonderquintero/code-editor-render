@@ -6,14 +6,18 @@ import {
 } from './CodeEditor.styles';
 import './CodeEditor.styles.css';
 
-export const CodeEditor = ({ identifier }: { identifier: string }) => {
+interface ICodeEditor {
+  identifier: string;
+}
+
+export const CodeEditor = ({ identifier }: ICodeEditor) => {
   const codeEditorRef = React.useRef<HTMLTextAreaElement>(null);
   const [text, setText] = useState('');
   const uniqueTextAreaID = `text-area-${identifier}`;
   const uniquePreID = `pre-element-${identifier}`;
 
-  const syntaxHighlights = (text: HTMLPreElement) => {
-    let data = text.innerHTML;
+  const syntaxHighlights = (preTextElement: HTMLPreElement) => {
+    let data = preTextElement.innerHTML;
     data = data.replace(
       /"(.*?)"/g,
       '<span class="code-quote">&quot;$1&quot;</span>'
@@ -22,7 +26,7 @@ export const CodeEditor = ({ identifier }: { identifier: string }) => {
       /&lt;(.*?)&gt;/g,
       '<span class="code-element">&lt;$1&gt;</span>'
     );
-    text.innerHTML = data;
+    preTextElement.innerHTML = data;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -62,6 +66,7 @@ export const CodeEditor = ({ identifier }: { identifier: string }) => {
   return (
     <StyledContainer>
       <StyledTextArea
+        data-testid="styled-text-area"
         value={text}
         onChange={(e) => setText(e.target.value)}
         autoCapitalize="off"
@@ -75,6 +80,7 @@ export const CodeEditor = ({ identifier }: { identifier: string }) => {
         ref={codeEditorRef}
       />
       <StyledPre
+        data-testid="styled-pre"
         aria-hidden="true"
         onScroll={handleTextAreaScroll}
         id={uniquePreID}
